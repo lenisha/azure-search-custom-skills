@@ -1,0 +1,572 @@
+{
+	"info": {
+		"_postman_id": "59b7d264-19fc-423f-bf73-95e2b0dc06ce",
+		"name": "CustomSearchPOC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetIndexer",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"value": "{{api-key}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexers?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexers"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateBlobIndexer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n            \n            \"name\": \"blobtosqlindexer\",\n            \"description\": \"combined indexer\",\n            \"dataSourceName\": \"cac-items\",\n            \"skillsetName\": \"cogniskillset\",\n            \"targetIndexName\": \"lessons-index\",\n            \"disabled\": null,\n            \"schedule\": null,\n            \"parameters\": {\n                \"batchSize\": null,\n                \"maxFailedItems\": null,\n                \"maxFailedItemsPerBatch\": null,\n                \"base64EncodeKeys\": false,\n                \"configuration\": {\n                    \"imageAction\": \"generateNormalizedImages\",\n                    \"dataToExtract\": \"contentAndMetadata\"\n                }\n            },\n            \"fieldMappings\": [\n                {\n                    \"sourceFieldName\": \"metadata_storage_path\",\n                    \"targetFieldName\": \"ID\",\n                    \"mappingFunction\": {\n                        \"name\": \"base64Encode\",\n                        \"parameters\": null\n                    }\n                },\n                {\n                \t\n                    \"sourceFieldName\": \"metadata_last_modified\",\n                    \"targetFieldName\": \"LessonDate\",\n                    \"mappingFunction\": null\n                },\n                {\n                \t\n                    \"sourceFieldName\": \"metadata_content_type\",\n                    \"targetFieldName\": \"content_type\",\n                    \"mappingFunction\": null\n                }\n                \n              \n            ],\n            \"outputFieldMappings\": [\n                {\n                    \"sourceFieldName\": \"/document/merged_content/organizations\",\n                    \"targetFieldName\": \"organizations\",\n                    \"mappingFunction\": null\n                },\n                {\n                    \"sourceFieldName\": \"/document/merged_content/locations\",\n                    \"targetFieldName\": \"locations\",\n                    \"mappingFunction\": null\n                },\n                {\n                    \"sourceFieldName\": \"/document/merged_content/keyphrases\",\n                    \"targetFieldName\": \"keyphrases\",\n                    \"mappingFunction\": null\n                }\n            ]\n}"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexers?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexers"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSQLIndexer",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n           \n            \"name\": \"sqldata-indexer\",\n            \"description\": \"opt\",\n            \"dataSourceName\": \"sharepointexport\",\n            \"skillsetName\": \"sqlstoreskillset\",\n            \"targetIndexName\": \"lessons-index\",\n            \"disabled\": null,\n            \"schedule\": null,\n            \"parameters\": {\n                \"batchSize\": null,\n                \"maxFailedItems\": null,\n                \"maxFailedItemsPerBatch\": null,\n                \"base64EncodeKeys\": false,\n                \"configuration\": {}\n            },\n            \"fieldMappings\": [\n            \t {\n                    \"sourceFieldName\": \"Lesson_Learned_Comment\",\n                    \"targetFieldName\": \"content\",\n                    \"mappingFunction\": null\n                }\n            ],\n            \"outputFieldMappings\": [\n                {\n                    \"sourceFieldName\": \"/document/content/locations\",\n                    \"targetFieldName\": \"locations\",\n                    \"mappingFunction\": null\n                },\n                {\n                    \"sourceFieldName\": \"/document/content/organizations\",\n                    \"targetFieldName\": \"organizations\",\n                    \"mappingFunction\": null\n                },\n                {\n                    \"sourceFieldName\": \"/document/content/keyphrases\",\n                    \"targetFieldName\": \"keyphrases\",\n                    \"mappingFunction\": null\n                },\n                {\n                    \"sourceFieldName\": \"/document/EventType\",\n                    \"targetFieldName\": \"EventType\",\n                    \"mappingFunction\": null\n                }\n            ]\n        }"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexers?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexers"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetIndex",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexes?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexes"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteDoc",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\"value\": [\r\n   {  \r\n      \"@search.action\": \"delete\",  \r\n      \"metadata_storage_path\": \"aHR0cHM6Ly9kb2Nzc2VhcmNoZS5ibG9iLmNvcmUud2luZG93cy5uZXQvY3N2L2xlc3NvbnMlMjBMZWFybmVkJTIwZGF0YS5jc3Y1\"  \r\n    }  \r\n  ]}"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexes/csv-index/docs/index?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexes",
+						"csv-index",
+						"docs",
+						"index"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateIndex",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  \n        {\n            \"name\": \"lessons-index\",\n            \"defaultScoringProfile\": \"boostKeys\",\n            \"fields\": [\n                {\n                    \"name\": \"ID\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": true,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Project_Name\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": true,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": \"en.microsoft\",\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Line_Of_Business\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": false,\n                    \"retrievable\": false,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"PM_Phase\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": false,\n                    \"retrievable\": false,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Event_Type\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": false,\n                    \"retrievable\": false,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Lessons_Learned_Category\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"content\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": true,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": \"standard.lucene\",\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Project_Type\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"Source\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"LessonDate\",\n                    \"type\": \"Edm.DateTimeOffset\",\n                    \"searchable\": false,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"locations\",\n                    \"type\": \"Collection(Edm.String)\",\n                    \"searchable\": true,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": \"standard.lucene\",\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"organizations\",\n                    \"type\": \"Collection(Edm.String)\",\n                    \"searchable\": true,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": \"standard.lucene\",\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"keyphrases\",\n                    \"type\": \"Collection(Edm.String)\",\n                    \"searchable\": true,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": false,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": \"standard.lucene\",\n                    \"synonymMaps\": []\n                },\n                {\n                    \"name\": \"content_type\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": false,\n                    \"retrievable\": true,\n                    \"sortable\": false,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                },\n                { \n                  \"name\": \"rating\", \n                  \"type\": \"Edm.Int32\",\n                  \"retrievable\": true\t\n                },\n                {\n                    \"name\": \"EventType\",\n                    \"type\": \"Edm.String\",\n                    \"searchable\": false,\n                    \"filterable\": true,\n                    \"retrievable\": true,\n                    \"sortable\": true,\n                    \"facetable\": true,\n                    \"key\": false,\n                    \"indexAnalyzer\": null,\n                    \"searchAnalyzer\": null,\n                    \"analyzer\": null,\n                    \"synonymMaps\": []\n                }\n              \n            ],\n            \n            \"corsOptions\": {\n                \"allowedOrigins\": [\n                    \"*\"\n                ],\n                \"maxAgeInSeconds\": 300\n            },\n            \"suggesters\": [\n                {\n                    \"name\": \"suggester\",\n                    \"searchMode\": \"analyzingInfixMatching\",\n                    \"sourceFields\": [\n                        \"Project_Name\",\n                        \"content\"\n                    ]\n                }\n            ],\n            \"analyzers\": [],\n            \"tokenizers\": [],\n            \"tokenFilters\": [],\n            \"charFilters\": [],\n            \"encryptionKey\": null,\n\t    \n\t    \"scoringProfiles\": [  \n\t    {  \n\t      \"name\": \"boostKeys\",  \n\t      \"text\": {  \n\t        \"weights\": {  \n\t          \"keyphrases\": 1.5,  \n\t          \"Project_Name\": 5  \n\t        }  \n\t      }  \n\t    },  \n\t    {  \n\t      \"name\": \"newAndHighlyRated\",  \n\t      \"functions\": [  \n\t        {  \n\t          \"type\": \"freshness\",  \n\t          \"fieldName\": \"LessonDate\",  \n\t          \"boost\": 10,  \n\t          \"interpolation\": \"quadratic\",  \n\t          \"freshness\": {  \n\t            \"boostingDuration\": \"P365D\"  \n\t          }  \n\t        },  \n\t        {\n\t          \"type\": \"magnitude\",  \n\t          \"fieldName\": \"rating\",  \n\t          \"boost\": 10,  \n\t          \"interpolation\": \"linear\",  \n\t          \"magnitude\": {  \n\t            \"boostingRangeStart\": 1,  \n\t            \"boostingRangeEnd\": 5,  \n\t            \"constantBoostBeyondRange\": false  \n\t          }  \n\t        }  \n\t      ]  \n\t    }  \n     ]\n   }"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/indexes/lessons-index?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"indexes",
+						"lessons-index"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSkillsets",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/skillsets?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"skillsets"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSkillset",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n          \n            \"name\": \"sqlstoreskillset\",\n            \"description\": \"basic skillset\",\n            \"skills\": [\n                {\n                    \"@odata.type\": \"#Microsoft.Skills.Text.EntityRecognitionSkill\",\n                    \"name\": \"#1\",\n                    \"description\": null,\n                    \"context\": \"/document/content\",\n                    \"categories\": [\n                        \"Person\",\n                        \"Quantity\",\n                        \"Organization\",\n                        \"URL\",\n                        \"Email\",\n                        \"Location\",\n                        \"DateTime\"\n                    ],\n                    \"defaultLanguageCode\": \"en\",\n                    \"minimumPrecision\": null,\n                    \"includeTypelessEntities\": null,\n                    \"inputs\": [\n                        {\n                            \"name\": \"text\",\n                            \"source\": \"/document/content\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        }\n                    ],\n                    \"outputs\": [\n                        {\n                            \"name\": \"locations\",\n                            \"targetName\": \"locations\"\n                        },\n                        {\n                            \"name\": \"organizations\",\n                            \"targetName\": \"organizations\"\n                        },\n                        {\n                            \"name\": \"entities\",\n                            \"targetName\": \"entities\"\n                        }\n                    ]\n                },\n                {\n                    \"@odata.type\": \"#Microsoft.Skills.Text.KeyPhraseExtractionSkill\",\n                    \"name\": \"#2\",\n                    \"description\": null,\n                    \"context\": \"/document/content\",\n                    \"defaultLanguageCode\": \"en\",\n                    \"maxKeyPhraseCount\": null,\n                    \"inputs\": [\n                        {\n                            \"name\": \"text\",\n                            \"source\": \"/document/content\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        }\n                    ],\n                    \"outputs\": [\n                        {\n                            \"name\": \"keyPhrases\",\n                            \"targetName\": \"keyphrases\"\n                        }\n                    ]\n                },\n                {\n                    \"@odata.type\": \"#Microsoft.Skills.Util.ShaperSkill\",\n                    \"name\": \"#3\",\n                    \"description\": null,\n                    \"context\": \"/document\",\n                    \"inputs\": [\n                        {\n                            \"name\": \"ID\",\n                            \"source\": \"/document/ID\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Project_Name\",\n                            \"source\": \"/document/Project_Name\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Line_Of_Business\",\n                            \"source\": \"/document/Line_Of_Business\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"PM_Phase\",\n                            \"source\": \"/document/PM_Phase\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Event_Type\",\n                            \"source\": \"/document/Event_Type\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Lessons_Learned_Category\",\n                            \"source\": \"/document/Lessons_Learned_Category\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"content\",\n                            \"source\": \"/document/content\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Project_Type\",\n                            \"source\": \"/document/Project_Type\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"Source\",\n                            \"source\": \"/document/Source\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"LessonDate\",\n                            \"source\": \"/document/LessonDate\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"KeyPhrases\",\n                            \"source\": \"/document/content/keyphrases/*\",\n                            \"sourceContext\": null,\n                            \"inputs\": []\n                        },\n                        {\n                            \"name\": \"entities\",\n                            \"source\": null,\n                            \"sourceContext\": \"/document/content\",\n                            \"inputs\": [\n                                {\n                                    \"name\": \"Locations\",\n                                    \"source\": \"/document/content/locations/*\",\n                                    \"sourceContext\": null,\n                                    \"inputs\": []\n                                },\n                                {\n                                    \"name\": \"Organizations\",\n                                    \"source\": \"/document/content/organizations/*\",\n                                    \"sourceContext\": null,\n                                    \"inputs\": []\n                                }\n                            ]\n                        }\n                    ],\n                    \"outputs\": [\n                        {\n                            \"name\": \"output\",\n                            \"targetName\": \"tableprojection\"\n                        }\n                    ]\n                },\n                {\n\t\t\t        \"@odata.type\": \"#Microsoft.Skills.Custom.WebApiSkill\",\n\t\t\t        \"description\": \"Our new OPS Mapping Event Type custom skill\",\n\t\t\t        \"uri\": \"{{funcUrl}}\",\n\t\t\t        \"batchSize\": 100,\n\t\t\t        \"context\": \"/document\",\n\t\t\t        \"inputs\": [\n\t\t\t            {\n\t\t\t              \"name\": \"Event_Type\",\n\t\t\t              \"source\": \"/document/Event_Type\"\n\t\t\t            }\n\t\t\t          ],\n\t\t\t          \"outputs\": [\n\t\t\t            {\n\t\t\t              \"name\": \"eventType\",\n\t\t\t              \"targetName\": \"EventType\"\n\t\t\t            }\n\t\t\t          ]\n\t\t\t     }\n                \n            ],\n            \"cognitiveServices\": {\n                \"@odata.type\": \"#Microsoft.Azure.Search.CognitiveServicesByKey\",\n                \"description\": \"{{cognitiveSvcId}}\",\n                \"key\": \"{{cognitiveSvcKey}}\"\n            },\n            \"knowledgeStore\": {\n                \"storageConnectionString\": \"{{knowledgeStore}}\",\n                \"projections\": [\n                    {\n                        \"tables\": [\n                            {\n                                \"tableName\": \"Document\",\n                                \"generatedKeyName\": \"Documentid\",\n                                \"source\": \"/document/tableprojection\",\n                                \"sourceContext\": null,\n                                \"inputs\": []\n                            },\n                            {\n                                \"tableName\": \"KeyPhrases\",\n                                \"generatedKeyName\": \"KeyPhrasesid\",\n                                \"source\": null,\n                                \"sourceContext\": \"/document/tableprojection/KeyPhrases/*\",\n                                \"inputs\": [\n                                    {\n                                        \"name\": \"keyphrases\",\n                                        \"source\": \"/document/tableprojection/KeyPhrases/*\",\n                                        \"sourceContext\": null,\n                                        \"inputs\": []\n                                    }\n                                ]\n                            },\n                            {\n                                \"tableName\": \"Entities\",\n                                \"generatedKeyName\": \"Entitiesid\",\n                                \"source\": \"/document/tableprojection/entities\",\n                                \"sourceContext\": null,\n                                \"inputs\": []\n                            }\n                        ],\n                        \"objects\": []\n                    }\n                ]\n            }\n        }"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/skillsets?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"skillsets"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetDataSources",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/datasources?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"datasources"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCSVDataSource",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\n           \n            \"name\": \"csvitems\",\n            \"description\": null,\n            \"type\": \"azureblob\",\n            \"subtype\": null,\n            \"credentials\": {\n                \"connectionString\": \"\"\n            },\n            \"container\": {\n                \"name\": \"csv\",\n                \"query\": null\n            },\n            \"dataChangeDetectionPolicy\": null,\n            \"dataDeletionDetectionPolicy\": null\n        }"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/datasources?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"datasources"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateDataSource",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "api-key",
+						"type": "text",
+						"value": "{{api-key}}"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n            \"name\": \"sharepointexport\",\n            \"description\": \"source for excel parsed data\",\n            \"type\": \"azuresql\",\n            \"subtype\": null,\n            \"credentials\": {\n                \"connectionString\": \"{{sqlConnectionUrl}};\"\n            },\n            \"container\": {\n                \"name\": \"[Lessons$]\"\n            },\n            \"dataChangeDetectionPolicy\": {\"@odata.type\" : \"#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy\"},\n            \"dataDeletionDetectionPolicy\": null\n}"
+				},
+				"url": {
+					"raw": "https://testindexeneros.search.windows.net/datasources/sharepointexport?api-version=2019-05-06-Preview",
+					"protocol": "https",
+					"host": [
+						"testindexeneros",
+						"search",
+						"windows",
+						"net"
+					],
+					"path": [
+						"datasources",
+						"sharepointexport"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "2019-05-06-Preview"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestLocalSkill",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"values\": [\n        {\n            \"recordId\": \"0\",\n            \"data\": {\n                \"Event_Type\": \"Recommendation for Improvement\"\n            }\n        },\n        {\n            \"recordId\": \"1\",\n            \"data\": {\n                \"Event_Type\": \"Challenge\"\n            }\n        },\n        {\n            \"recordId\": \"2\",\n            \"data\": {\n                \"Event_Type\": \"Success\"\n            }\n        },\n        {\n            \"recordId\": \"3\",\n            \"data\": {\n                \"Event_Type\": \"Success\"\n            }\n        },\n        {\n            \"recordId\": \"4\",\n            \"data\": {\n                \"Event_Type\": \"Success\"\n            }\n        },\n        {\n            \"recordId\": \"5\",\n            \"data\": {\n                \"Event_Type\": \"Success\"\n            }\n        },\n        {\n            \"recordId\": \"6\",\n            \"data\": {\n                \"Event_Type\": \"Challenge\"\n            }\n        },\n        {\n            \"recordId\": \"7\",\n            \"data\": {\n                \"Event_Type\": \"Challenge\"\n            }\n        },\n        {\n            \"recordId\": \"8\",\n            \"data\": {\n                \"Event_Type\": \"Challenge\"\n            }\n        },\n        {\n            \"recordId\": \"9\",\n            \"data\": {\n                \"Event_Type\": \"Challenge\"\n            }\n        }\n    ]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:7071/api/EventTypeSkill",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7071",
+					"path": [
+						"api",
+						"EventTypeSkill"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TestFuncSkill",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"values\": [\r\n        {\r\n        \t\"recordId\": \"1\",\r\n        \t\"data\":\r\n\t        {\r\n\t        \t\"Event_Type\": \"Success\"\r\n           }\r\n        }\r\n   ]\r\n}"
+				},
+				"url": {
+					"raw": "https://eventtypeskill.azurewebsites.net/api/EventTypeSkill?code=euMUl03bX4b2Q9BYFHSVivaqFkeWhkUWobthamPK16ixmyYbNM6ZJw==",
+					"protocol": "https",
+					"host": [
+						"eventtypeskill",
+						"azurewebsites",
+						"net"
+					],
+					"path": [
+						"api",
+						"EventTypeSkill"
+					],
+					"query": [
+						{
+							"key": "code",
+							"value": "euMUl03bX4b2Q9BYFHSVivaqFkeWhkUWobthamPK16ixmyYbNM6ZJw=="
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
