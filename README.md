@@ -1,6 +1,8 @@
 # azure-search-custom-skills
 
 ## SDL
+
+```
 CREATE TABLE [dbo].[Lessons$] (
 ID int IDENTITY(1, 1) PRIMARY KEY,
 [Project_Name] nvarchar(255),
@@ -13,3 +15,4 @@ ID int IDENTITY(1, 1) PRIMARY KEY,
 [Source] nvarchar(255),
 [LessonDate] datetime
 )
+```
