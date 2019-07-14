@@ -273,3 +273,14 @@ Verify all the mappings
 Create Azure Storage account and Blob cotainer, upload  documents in two folders based on their Source.
 ![docs](docs/blob.png)
 
+# References
+[Scoring Profiles](https://docs.microsoft.com/en-us/azure/search/index-add-scoring-profiles)
+[Azure Search REST](https://docs.microsoft.com/en-us/rest/api/searchservice/index)
+[Azure Search Analyzers](https://github.com/endintiers/AzureSearch-AnalyzerDemo-Alice)
+[Azure Blob Indexer](https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage)
+[Combining Data in Azure Search](https://cmatskas.com/combining-data-from-multiple-sources-in-azure-search/)
+[Custom Skill Template](https://github.com/Azure-Samples/azure-search-knowledge-mining/blob/master/03%20-%20Data%20Science%20and%20Custom%20Skills/Azure%20Function%20Custom%20Skills/0_CustomSkillTemplate.cs)
+[Create Custom Skill](https://docs.microsoft.com/en-us/azure/search/cognitive-search-create-custom-skill-example)
+[Saerch Documents](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents)
+[Saerch Sample](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs)
+[Doc Based bot](https://docbasedbot-test.cloudapp.net/Home/Index)
