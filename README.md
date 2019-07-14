@@ -195,6 +195,8 @@ Refer to `CreateSqlIndexer` example in postman collection, it maps fields extrac
         }
 ```
 Once indexers created they start process of indexing and populating the search data.
+![docs](docs/sqlindexer.png)
+
 
 ## Custom Skillset
 In our example `CreateSkillset` we have created a skillset that uses cognitive services to extract data, skill to store extracted data in knowledge store and custom skill that maps various entries of `Event_Type` to only two possible values in the new field `EventType`
@@ -222,6 +224,13 @@ Our custom skill is hosted in Azure Function and here we define what data will b
 ```
 
 Note that when we will create Indexer it will define in `outputMappings` that `EventType` field coming from custom skill will be mapped to Indexed field.
+
+Publish Custom Skill to Azure Function and test it using `TestFuncSkill`
+![docs](docs/skilldata.png)
+
+You could see the data processes in Function Logs:
+![docs](docs/skill.png)
+
 
 ## SQL data preparation
 To import structured data from Excel  create Azure SQL database and create a table with all the fields coming from excel columns and add `IDENTITY` column that would searve as unique key for the index
