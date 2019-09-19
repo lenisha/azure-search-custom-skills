@@ -383,7 +383,7 @@ WITH (TRACK_COLUMNS_UPDATED = ON)
 ```
 
 Use `Tasks-> Import Data` wizard to import excel data, choose `Microsoft Excel` as input datasource
-![data](docs/importdata-excel.png)
+![data](docs/importdata-excel.png) {:height="50%" width="50%"}
 and OLEDB provider for SQL server as destination
 ![data](docs/importdata-sql.png)
 Verify all the mappings
