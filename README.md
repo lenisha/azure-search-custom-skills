@@ -4,11 +4,8 @@ To provide uniform search capabilities across both  - structured (Azure SQL) and
 
 
 ## Create Azure resources
- Create Azure Search
+ Create Azure Search  and Cognitive service
 ![docs](docs/azsearch.png)
-
- and Cognitive service
-
 ![docs](docs/azcognitive.png)
 
 ## Index Schema
@@ -415,6 +412,7 @@ and OLEDB provider for SQL server as destination
 ![data](docs/importdata-sql.png ) 
 
 Verify all the mappings
+
 ![data](docs/importdata-excel.png)
 
 
