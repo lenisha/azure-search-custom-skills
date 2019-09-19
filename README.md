@@ -385,7 +385,7 @@ WITH (TRACK_COLUMNS_UPDATED = ON)
 Use `Tasks-> Import Data` wizard to import excel data, choose `Microsoft Excel` as input datasource
 ![data](docs/importdata-excel.png) {:height="50%" width="50%"}
 and OLEDB provider for SQL server as destination
-![data](docs/importdata-sql.png)
+![data](docs/importdata-sql.png | height=50) 
 Verify all the mappings
 ![data](docs/importdata-excel.png)
 
@@ -395,15 +395,16 @@ Create Azure Storage account and Blob cotainer, upload  documents in two folders
 ![docs](docs/blob.png)
 
 # References
-[Scoring Profiles](https://docs.microsoft.com/en-us/azure/search/index-add-scoring-profiles)
-[Azure Search REST](https://docs.microsoft.com/en-us/rest/api/searchservice/index)
-[Azure Search Analyzers](https://github.com/endintiers/AzureSearch-AnalyzerDemo-Alice)
-[Azure Blob Indexer](https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage)
-[Combining Data in Azure Search](https://cmatskas.com/combining-data-from-multiple-sources-in-azure-search/)
-[Custom Skill Template](https://github.com/Azure-Samples/azure-search-knowledge-mining/blob/master/03%20-%20Data%20Science%20and%20Custom%20Skills/Azure%20Function%20Custom%20Skills/0_CustomSkillTemplate.cs)
-[Create Custom Skill](https://docs.microsoft.com/en-us/azure/search/cognitive-search-create-custom-skill-example)
-[Saerch Documents](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents)
-[Saerch Sample](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs)
-[Doc Based bot](https://docbasedbot-test.cloudapp.net/Home/Index)
-[AzSearch.js](https://github.com/Yahnoosh/AzSearch.js)
-[AzSearch Web application generator](http://azsearchstore.azurewebsites.net/azsearchgenerator/index.html)
+
+- [Scoring Profiles](https://docs.microsoft.com/en-us/azure/search/index-add-scoring-profiles)
+- [Azure Search REST](https://docs.microsoft.com/en-us/rest/api/searchservice/index)
+- [Azure Search Analyzers](https://github.com/endintiers/AzureSearch-AnalyzerDemo-Alice)
+- [Azure Blob Indexer](https://docs.microsoft.com/en-us/azure/search/search-howto-indexing-azure-blob-storage)
+- [Combining Data in Azure Search](https://cmatskas.com/combining-data-from-multiple-sources-in-azure-search/)
+- [Custom Skill Template](https://github.com/Azure-Samples/azure-search-knowledge-mining/blob/master/03%20-%20Data%20Science%20and%20Custom%20Skills/Azure%20Function%20Custom%20Skills/0_CustomSkillTemplate.cs)
+- [Create Custom Skill](https://docs.microsoft.com/en-us/azure/search/cognitive-search-create-custom-skill-example)
+- [Saerch Documents](https://docs.microsoft.com/en-us/rest/api/searchservice/search-documents)
+- [Saerch Sample](https://github.com/Azure-Samples/search-dotnet-asp-net-mvc-jobs)
+- [Doc Based bot](https://docbasedbot-test.cloudapp.net/Home/Index)
+- [AzSearch.js](https://github.com/Yahnoosh/AzSearch.js)
+- [AzSearch Web application generator](http://azsearchstore.azurewebsites.net/azsearchgenerator/index.html)
