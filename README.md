@@ -4,7 +4,9 @@ To provide uniform search capabilities across both  - structured (Azure SQL) and
 
 
 ## Create Azure resources
- Create Azure Search  and Cognitive service
+
+Create Azure Search  and Cognitive service
+
 ![docs](docs/azsearch.png)
 ![docs](docs/azcognitive.png)
 
