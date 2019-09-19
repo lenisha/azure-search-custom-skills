@@ -5,9 +5,9 @@ To provide uniform search capabilities across both  - structured (Azure SQL) and
 
 ## Create Azure resources
  Create Azure Search
-![docs](docs/azsearch.png | height=50)
+![docs](docs/azsearch.png)
  and Cognitive service
-![docs](docs/azcognitive.png | height=50)
+![docs](docs/azcognitive.png)
 
 ## Index Schema
 Prepare a schema that would be populated by indexers, we will use postman to send th REST API call
@@ -226,10 +226,10 @@ Our custom skill is hosted in Azure Function and here we define what data will b
 Note that when we will create Indexer it will define in `outputMappings` that `EventType` field coming from custom skill will be mapped to Indexed field.
 
 Publish Custom Skill to Azure Function and test it using `TestFuncSkill`
-![docs](docs/skilldata.png | height=50)
+![docs](docs/skilldata.png)
 
 You could see the data processes in Function Logs:
-![docs](docs/skill.png | height=50)
+![docs](docs/skill.png)
 
 ## Web Application
 To provide web application access to search index and ability to retrive the documents we could use ReactJS library [AzSearch.js](https://github.com/Yahnoosh/AzSearch.js) and it's corresponding [Web application generator](http://azsearchstore.azurewebsites.net/azsearchgenerator/index.html)
@@ -383,11 +383,11 @@ WITH (TRACK_COLUMNS_UPDATED = ON)
 ```
 
 Use `Tasks-> Import Data` wizard to import excel data, choose `Microsoft Excel` as input datasource
-![data](docs/importdata-excel.png | height=50) 
+![data](docs/importdata-excel.png) 
 and OLEDB provider for SQL server as destination
-![data](docs/importdata-sql.png | height=50) 
+![data](docs/importdata-sql.png ) 
 Verify all the mappings
-![data](docs/importdata-excel.png | height=50)
+![data](docs/importdata-excel.png)
 
 
 ## Blob Data Preparation
