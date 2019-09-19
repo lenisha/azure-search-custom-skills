@@ -6,7 +6,9 @@ To provide uniform search capabilities across both  - structured (Azure SQL) and
 ## Create Azure resources
  Create Azure Search
 ![docs](docs/azsearch.png)
+
  and Cognitive service
+
 ![docs](docs/azcognitive.png)
 
 ## Index Schema
@@ -90,7 +92,7 @@ Now we will define how indexers will process data and populate index. Create Ski
 Refer to `CreateBlobIndexer` example in postman collection, it maps fields typically extracted by BlobIndexer to the schema we defined using `fieldMappings` :
 
 ```
- "fieldMappings": [
+     "fieldMappings": [
                 {
                     "sourceFieldName": "metadata_storage_path",
                     "targetFieldName": "ID",
@@ -98,6 +100,16 @@ Refer to `CreateBlobIndexer` example in postman collection, it maps fields typic
                         "name": "base64Encode",
                         "parameters": null
                     }
+                },
+                {
+                    "sourceFieldName": "metadata_storage_path",
+                    "targetFieldName": "metadata_storage_path",
+                    "mappingFunction": null
+                },
+                {
+                    "sourceFieldName": "metadata_storage_path",
+                    "targetFieldName": "Source",
+                    "mappingFunction" : { "name" : "extractTokenAtPosition", "parameters" : { "delimiter" : "/", "position" : 4 } }
                 },
                 {
                 	
@@ -110,10 +122,23 @@ Refer to `CreateBlobIndexer` example in postman collection, it maps fields typic
                     "sourceFieldName": "metadata_content_type",
                     "targetFieldName": "content_type",
                     "mappingFunction": null
-                }  
-            ]
+                },
+                {
+                	
+                    "sourceFieldName": "Project_Name",
+                    "targetFieldName": "Project_Name",
+                    "mappingFunction": null
+                }
+     ]
 ```
 it' important to have ID mapped to uniquely identified field, and we map also fields with similar meaning with sql data. 
+In this example above we also extract part of the Path in the blob container to serve as `Source` field data.
+And we map the custom `Project_Name` metadata from blob record to the index as well.
+
+so that example Blob below will get it's all firelds extracted
+![docs](docs/blobdoc.png)
+
+
 Indexer also defines how to map fields extracted by cognitive skillset we are using with it.
 ```
 {
@@ -384,8 +409,11 @@ WITH (TRACK_COLUMNS_UPDATED = ON)
 
 Use `Tasks-> Import Data` wizard to import excel data, choose `Microsoft Excel` as input datasource
 ![data](docs/importdata-excel.png) 
+
 and OLEDB provider for SQL server as destination
+
 ![data](docs/importdata-sql.png ) 
+
 Verify all the mappings
 ![data](docs/importdata-excel.png)
 
