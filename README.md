@@ -348,6 +348,11 @@ automagic.addCheckboxFacet("Project_TypeFacet", "Project_Type", "string");
 
 Similar process is used for suggestion box customizations, more details on capabilities could be found at [AzSearch.js](https://github.com/Yahnoosh/AzSearch.js)
 
+## WebApp Hosting
+To host webapp use [Azure Storage for Static websites](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website-how-to) Feature. Once enables on Storage account you would see `$web` container that will be used for hosting artifacts.
+
+Use Visual studio Code to upload the files - for tutorial refer to [VSCode Deploy to Azure Storage](https://code.visualstudio.com/tutorials/static-website/deploy-website)
+
 ## SQL data preparation
 To import structured data from Excel  create Azure SQL database and create a table with all the fields coming from excel columns and add `IDENTITY` column that would searve as unique key for the index
 
