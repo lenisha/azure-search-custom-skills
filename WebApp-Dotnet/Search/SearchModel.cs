@@ -14,7 +14,6 @@ namespace CognitiveSearch.UI
             "Project_Name",
             "EventType",
             "Source",
-            "Lessons_Learned_Category",
             "Project_Type",
             "LessonDate",
             "keyphrases"
@@ -45,7 +44,10 @@ namespace CognitiveSearch.UI
             "Project_Name",
             "LessonDate",
             "Source",
-            "keyphrases"
+            "keyphrases",
+            "content_type",
+            "EventType",
+            "Lessons_Learned_Category"
             //"metadata_storage_name",
 
             //"persons",

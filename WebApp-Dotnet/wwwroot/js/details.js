@@ -28,7 +28,6 @@ function ShowDocument(id) {
             }
 
             var fileContainerHTML = GetFileHTML(path);
-
             var transcriptContainerHTML = htmlDecode(result.content.trim());
 
             // If we have merged content, let's use it.
@@ -37,26 +36,88 @@ function ShowDocument(id) {
                     transcriptContainerHTML = htmlDecode(result.merged_content.trim());
                 }
             }
+            var name;
+            // use Project_Name as Title
+            if (result["metadata_storage_name"] !== undefined) {
+                name = result.metadata_storage_name.split(".")[0];
+            }
+            else {
+                name = result.Project_Name;
+            }
 
-            var fileName = "File";
+            if (result["metadata_title"] !== undefined) {
+                title = result.metadata_title;
+            }
+            else {
+                // Bring up the name to the top
+                title = name;
+               
+            }
+            // format Date
+            var dateChanged = new Date(result.LessonDate);
+            dateChanged = dateChanged.toLocaleDateString(undefined, {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
 
-            $('#details-pivot-content').html(`<div id="file-pivot" class="ms-Pivot-content" data-content="file">
-                                            <div id="file-viewer" style="height: 100%;">
-                                            </div>
-                                        </div>
-                                        <div id="transcript-pivot" class="ms-Pivot-content" data-content="transcript">
+            // format type
+            var contentType = getContentTypeShort(result.content_type);
+
+            // format source
+            var Source = result.Source;
+
+
+            var detailsContentHtml = `<div id="transcript-pivot" class="ms-Pivot-content" data-content="transcript">
                                             <div id="transcript-viewer" style="height: 100%;">
+                                                 <div class="results-header">
+                                                    <h4>Project Name: ${name}</h4>
+                                                 </div>
+                                       
+                                                <div >
+                                                    <ul class="resultProperties">
+                                                        <li class="resultProperties">Date: <span>${dateChanged}</span></li> 
+                                                        <li class="resultProperties_Source">Content Type: <span>${contentType}</span></li>
+                                                      </ul>     
+                                                 </div>
+                                                <div >
+                                                     <ul class="resultProperties">
+                                                      <li class="resultProperties_Source">Source: <span>${Source}</span></li>
+                                                      </ul>     
+                                                 </div>
+                                                 <div>
+                                                  <ul class="resultProperties">
+                                                    <li class="resultProperties_Category">Event Type: <span>${result.EventType}</span></li>
+                                                   </ul>
+                                                  </div>
+                                                  <div>
+                                                  <ul class="resultProperties">
+                                                    <li class="resultProperties_Category">Category: <span>${result.Lessons_Learned_Category}</span></li>
+                                                  </ul>
+                                                  </div>
+
                                                 <div id='transcript-div'>
                                                     <pre id="transcript-viewer-pre"></pre>
                                                 </div>
                                             </div>
-                                        </div>`);
+                                        </div>`;
+            pivotLinksHTML += `<li id="transcript-pivot-link" class="ms-Pivot-link  is-selected" data-content="transcript" title="Details" tabindex="1">Details</li>`;
 
-            $('#file-viewer').html(fileContainerHTML);
+            // it's coming from blob file
+            if (result["metadata_storage_path"] !== undefined && result["metadata_storage_path"] !== null) {
+                detailsContentHtml += `<div id="file-pivot" class="ms-Pivot-content" data-content="file">
+                                            <div id="file-viewer" style="height: 100%;">
+                                            </div>
+                                        </div>`; 
+            }
+            var fileName = "File";
+
+            $('#details-pivot-content').html(detailsContentHtml);
             $('#transcript-viewer-pre').html(transcriptContainerHTML);
-
-            pivotLinksHTML += `<li id="file-pivot-link" class="ms-Pivot-link is-selected" data-content="file" title="File" tabindex="1">${fileName}</li>
-                       <li id="transcript-pivot-link" class="ms-Pivot-link " data-content="transcript" title="Transcript" tabindex="1">Transcript</li>`;
+            if (result["metadata_storage_path"] !== undefined && result["metadata_storage_path"] !== null) {
+                $('#file-viewer').html(fileContainerHTML);
+                pivotLinksHTML += `<li id="file-pivot-link" class="ms-Pivot-link" data-content="file" title="File" tabindex="1">${fileName}</li>`;
+            }
 
             var tagContainerHTML = GetTagsHTML(result);
 
@@ -70,7 +131,10 @@ function ShowDocument(id) {
             }
 
             //Log Click Events
-            LogClickAnalytics(result.metadata_storage_name, 0);
+            var docId = id;
+            if (result.metadata_storage_path !== null)
+                docId = result.metadata_storage_path;
+            LogClickAnalytics(docId, 0);
         });
 }
 

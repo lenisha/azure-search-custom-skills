@@ -312,7 +312,7 @@ h1, h2, h3, h4, h5 {
     margin: 10px;
     float: left;
     width: auto;
-    height: 30px;
+    height: 60px;
 }
 
 .navbar-user {
@@ -386,6 +386,41 @@ pre {
     background-color: #0076BB;
     opacity: 1;
 }
+
+.resultDescription {
+    margin: 0.5em 0 0 0;
+}
+
+ul.resultProperties {
+    margin: 1em 0 0 0;
+    padding: 0;
+}
+
+ul.resultProperties li {
+        display: inline-block;
+        font-size: 1em;
+        padding: 0px;
+    }
+
+ul.resultProperties {
+    color: #777;
+}
+
+ul.resultProperties li span {
+        padding-left: 0.3em;
+}
+
+     ul.resultProperties li.resultProperties {
+        width: 9em;
+    }
+
+     ul.resultProperties li.resultProperties__Category {
+        width: 20em;
+    }
+
+     ul.resultProperties li.resultProperties__Source {
+        width: 15em;
+    }
 
 #search-label {
     color: #fff;

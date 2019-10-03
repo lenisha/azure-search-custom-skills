@@ -44,8 +44,9 @@ namespace CognitiveSearch.UI
                 apiKey = configuration.GetSection("SearchApiKey")?.Value;
                 IndexName = configuration.GetSection("SearchIndexName")?.Value;
                 idField = configuration.GetSection("KeyField")?.Value;
-                telemetryClient.InstrumentationKey = configuration.GetSection("InstrumentationKey")?.Value;
+                telemetryClient.InstrumentationKey = configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY")?.Value;
 
+                Console.WriteLine("APIKEY {0}  Instrucmentation {1}", apiKey, telemetryClient.InstrumentationKey);
                 // Create an HTTP reference to the catalog index
                 _searchClient = new SearchServiceClient(searchServiceName, new SearchCredentials(apiKey));
                 _indexClient = _searchClient.Indexes.GetClient(IndexName);

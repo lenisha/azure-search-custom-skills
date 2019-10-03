@@ -53,8 +53,8 @@ namespace CognitiveSearch.UI.Controllers
                 TempData["searchId"] = searchidId;
 
             TempData["query"] = q;
-            TempData["applicationInstrumentationKey"] = _configuration.GetSection("InstrumentationKey")?.Value;
-
+            TempData["applicationInstrumentationKey"] = _configuration.GetSection("APPINSIGHTS_INSTRUMENTATIONKEY")?.Value;
+            TempData["searchServiceName"] = _configuration.GetSection("SearchServiceName")?.Value;
             return View();
         }
 

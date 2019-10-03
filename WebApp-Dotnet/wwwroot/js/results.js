@@ -38,9 +38,14 @@ function UpdateResults(data) {
             path = Base64Decode(result.metadata_storage_path) + token;
         }
         else {
-            path = result.metadata_storage_path + token;
+            if (result["metadata_storage_path"] !== undefined && result["metadata_storage_path"] !== null) {
+                path = result.metadata_storage_path + token;
+            }
+            else {
+                path = "record.sql"
+            }
         }
-
+        // use Project_Name as Title
         if (result["metadata_storage_name"] !== undefined) {
             name = result.metadata_storage_name.split(".")[0];
         }
@@ -54,8 +59,26 @@ function UpdateResults(data) {
         else {
             // Bring up the name to the top
             title = name;
-            name = "";
+            //name = "";
         }
+        // format summary
+        var summary = result.content.length < 400 ? result.content : result.content.substring(0, 400) + "...";
+        // format Date
+        var dateChanged = new Date(result.LessonDate);
+        dateChanged = dateChanged.toLocaleDateString(undefined, {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+
+        // format score
+        var score = numeral(data.results[i]["@search.score"]).format("0.00");
+
+        // format type
+        var contentType = getContentTypeShort(result.content_type);
+
+        // format source
+        var Source = result.Source;
 
         if (path !== null) {
             var classList = "results-div ";
@@ -70,6 +93,15 @@ function UpdateResults(data) {
                                         <div class="results-header">
                                             <h4>${name}</h4>
                                         </div>
+                                        <div class="resultDescription">
+                                            ${summary}
+                                        </div>
+                                        <ul class="resultProperties">
+                                            <li class="resultProperties">Date: <span>${dateChanged}</span></li>
+                                            <li class="resultProperties">Score: <span>${score}</span></li>
+                                            <li class="resultProperties">Type: <span>${contentType}</span></li>
+                                            <li class="resultProperties">Source: <span>${Source}</span></li>
+                                        </ul>
                                         <div>${tags}</div>
                                     </div>
                                 </div>`;
@@ -86,6 +118,15 @@ function UpdateResults(data) {
                                         <div class="results-header">
                                             <h4>${name}</h4>
                                         </div>
+                                        <div class="resultDescription">
+                                            ${summary}
+                                        </div>
+                                        <ul class="resultProperties">
+                                            <li class="resultProperties">Date: <span>${dateChanged}</span></li>
+                                            <li class="resultProperties">Score: <span>${score}</span></li>
+                                            <li class="resultProperties">Type: <span>${contentType}</span></li>
+                                            <li class="resultProperties">Source: <span>${Source}</span></li>
+                                        </ul>
                                         <div>${tags}</div>                               
                                     </div>
                                 </div>`;
@@ -103,6 +144,15 @@ function UpdateResults(data) {
                                         <div class="results-header">
                                             <h4>${name}</h4>
                                         </div>
+                                        <div class="resultDescription">
+                                            ${summary}
+                                        </div>
+                                        <ul class="resultProperties">
+                                            <li class="resultProperties">Date: <span>${dateChanged}</span></li>
+                                            <li class="resultProperties">Score: <span>${score}</span></li>
+                                            <li class="resultProperties">Type: <span>${contentType}</span></li>
+                                            <li class="resultProperties_Source">Source: <span>${Source}</span></li>
+                                        </ul>    
                                         <div>${tags}</div>                                 
                                     </div>
                                 </div>`;
@@ -128,7 +178,10 @@ function UpdateResults(data) {
                 else if (pathLower.includes(".xls")) {
                     icon = "ms-Icon--ExcelDocument";
                 }
-
+                else if (pathLower.includes(".sql")) {
+                    icon = "ms-Icon--CertifiedDatabase";
+                }
+                
                 resultsHtml += `<div class="${classList}" onclick="ShowDocument('${id}');">
                                     <div class="search-result">
                                        <div class="results-icon col-md-1">
@@ -137,8 +190,16 @@ function UpdateResults(data) {
                                             </div>
                                         </div>
                                         <div class="results-body col-md-11">
-                                            <h4>${title}</h4>
                                             <h5>${name}</h5>
+                                            <div class="resultDescription">
+                                                ${summary}
+                                            </div>
+                                            <ul class="resultProperties">
+                                                <li class="resultProperties">Date: <span>${dateChanged}</span></li>
+                                                <li class="resultProperties">Score: <span>${score}</span></li>
+                                                <li class="resultProperties">Type: <span>${contentType}</span></li>
+                                                <li class="resultProperties_Source">Source: <span>${Source}</span></li>
+                                            </ul>
                                             <div style="margin-top:10px;">${tags}</div>
                                         </div>
                                     </div>
@@ -158,3 +219,5 @@ function UpdateResults(data) {
 
     $("#doc-details-div").html(resultsHtml);
 }
+
+

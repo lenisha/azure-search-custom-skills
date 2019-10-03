@@ -127,3 +127,33 @@ function GoToReference(selector) {
         scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
     });
 }
+
+function getContentTypeShort(contentType) {
+
+    if (contentType == null)
+        return "SQL Data";
+
+    switch (contentType) {
+        case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        case "application/msword":
+        case "application/vnd.ms-word.document.macroenabled.12":
+        case "application/vnd.ms-word2006ml":
+        case "application/vnd.ms-wordml":
+            return "MS-Word";
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+        case "application/vnd.ms-excel":
+        case "application/vnd.ms-excel.sheet.macroenabled.12":
+        case "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet":
+            return "MS-Excel";
+        case "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+        case "application/application/vnd.ms-powerpoint":
+        case "application/vnd.ms-powerpoint.presentation.macroenabled.12":
+            return "MS-PowerPoint";
+        case "text/plain; charset=windows-1252":
+            return "Text";
+        case "application/pdf":
+            return "PDF";
+        default:
+            return contentType;
+    }
+}

@@ -9,7 +9,7 @@ var token = "";
 var selectedFacets = [];
 var currentPage = 1;
 var searchId;
-var searchServiceName = "";
+
 var indexName = "";
 var scoringProfile = "";
 
