@@ -279,7 +279,7 @@ Use Visual Studio (or CI/CD) to publish the application - for tutorial refer to 
 
 
 ## Reporting
-Reporting contains optional pre-built PowerBI reports that can be used to monitor your solution and to understand user search behavior. They leverage data captured via Application Insights and extended to use Knowledge Store and can be modified to meet your particular business objectives.
+[Reporting](./Reporting) contains optional pre-built PowerBI reports that can be used to monitor your solution and to understand user search behavior. They leverage data captured via Application Insights and extended to use Knowledge Store and can be modified to meet your particular business objectives.
 
 ## SQL data preparation
 To import structured data from Excel  create Azure SQL database and create a table with all the fields coming from excel columns and add `IDENTITY` column that would searve as unique key for the index
