@@ -2,18 +2,18 @@
 
 To provide uniform search capabilities across both  - structured (Azure SQL) and unstructured (Azure Blob) documents we need to combine indexed data in a single searchable index.
 
-[Create Azure resources](#Create-Azure-resources)
-[Index Schema](#Index-Schema)
-[Scoring Profile](#Scoring-Profile)
-[BlobIndexer](#BlobIndexer)
-[SQLIndexer](#SQLIndexer)
-[Custom Skillset](#Custom-Skillset)
-[Web Application DotNet](#Web-Application-DotNet)
-[WebApp Hosting](#WebApp-Hosting)
-[Reporting](#Reporting)
-[SQL data preparation](#SQL-data-preparation)
-[Blob Data Preparation](#Blob-Data-Preparation)
-[References](#References)
+- [Create Azure resources](#Create-Azure-resources)
+- [Index Schema](#Index-Schema)
+- [Scoring Profile](#Scoring-Profile)
+- [BlobIndexer](#BlobIndexer)
+- [SQLIndexer](#SQLIndexer)
+- [Custom Skillset](#Custom-Skillset)
+- [Web Application DotNet](#Web-Application-DotNet)
+- [WebApp Hosting](#WebApp-Hosting)
+- [Reporting](#Reporting)
+- [SQL data preparation](#SQL-data-preparation)
+- [Blob Data Preparation](#Blob-Data-Preparation)
+- [References](#References)
 
 ## Create Azure resources
 
