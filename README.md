@@ -2,6 +2,18 @@
 
 To provide uniform search capabilities across both  - structured (Azure SQL) and unstructured (Azure Blob) documents we need to combine indexed data in a single searchable index.
 
+[Create Azure resources](#Create-Azure-resources)
+[Index Schema](#Index-Schema)
+[Scoring Profile](#Scoring-Profile)
+[BlobIndexer](#BlobIndexer)
+[SQLIndexer](#SQLIndexer)
+[Custom Skillset](#Custom-Skillset)
+[Web Application DotNet](#Web-Application-DotNet)
+[WebApp Hosting](#WebApp-Hosting)
+[Reporting](#Reporting)
+[SQL data preparation](#SQL-data-preparation)
+[Blob Data Preparation](#Blob-Data-Preparation)
+[References](#References)
 
 ## Create Azure resources
 
@@ -264,6 +276,10 @@ See the folder [WebApp-Dotnet](./WebApp-Dotnet) for more details
 To host webapp use [App Service](https://docs.microsoft.com/en-us/azure/app-service/) service connected with AppInsights.
 
 Use Visual Studio (or CI/CD) to publish the application - for tutorial refer to [Publish a Web app to Azure App Service using Visual Studio](https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019)
+
+
+## Reporting
+Reporting contains optional pre-built PowerBI reports that can be used to monitor your solution and to understand user search behavior. They leverage data captured via Application Insights and extended to use Knowledge Store and can be modified to meet your particular business objectives.
 
 ## SQL data preparation
 To import structured data from Excel  create Azure SQL database and create a table with all the fields coming from excel columns and add `IDENTITY` column that would searve as unique key for the index
